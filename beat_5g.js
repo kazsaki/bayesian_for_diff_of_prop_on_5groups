@@ -1,6 +1,4 @@
 
-// document.getElementById("explain_posterior").style.visibility ="hidden";
-
 function obs_chk() {
   let denoms0 = document.getElementById('denoms').value;
   let numers0 = document.getElementById('numers').value;
@@ -303,27 +301,30 @@ function calc_BE() {
 
   /*mean of posterior distributions*/
   const means = [];
+  const means_round = [];
   for(let i = 0; i < g_length; i++) {
-    means[i] = Math.round(jStat.mean(random_samples[i]) * 1000) / 1000;
+    means[i] = jStat.mean(random_samples[i]);
+    means_round[i] = Math.round(means[i] * 1000000) / 1000000;
   };
 
-  result_mean_A.innerHTML = "Mean of Group A's rate : " + means[0] + "%";
-  result_mean_B.innerHTML = "Mean of Group B's rate : " + means[1] + "%";
+
+  result_mean_A.innerHTML = "Mean of Group A's rate : " + means_round[0] + "%";
+  result_mean_B.innerHTML = "Mean of Group B's rate : " + means_round[1] + "%";
 
   if (g_length >= 3) {
-    result_mean_C.innerHTML = "Mean of Group C's rate : " + means[2] + "%";
+    result_mean_C.innerHTML = "Mean of Group C's rate : " + means_round[2] + "%";
   } else {
     result_mean_C.innerHTML = "";
   }
 
   if (g_length >= 4) {
-    result_mean_D.innerHTML = "Mean of Group D's rate : " + means[3] + "%";
+    result_mean_D.innerHTML = "Mean of Group D's rate : " + means_round[3] + "%";
   } else {
     result_mean_D.innerHTML = "";
   }
 
   if (g_length == 5) {
-    result_mean_E.innerHTML = "Mean of Group E's rate : " + means[4] + "%";
+    result_mean_E.innerHTML = "Mean of Group E's rate : " + means_round[4] + "%";
   } else {
     result_mean_E.innerHTML = "";
   }
